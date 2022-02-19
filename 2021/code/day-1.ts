@@ -1,10 +1,4 @@
-import fs from 'fs';
-
-const input = fs
-  .readFileSync(__dirname + '/input.txt')
-  .toString()
-  .split('\n')
-  .map(el => Number(el));
+import { getInput } from '../../utils';
 
 // *
 const countIncreases = (data: number[]) => {
@@ -17,6 +11,8 @@ const countIncreases = (data: number[]) => {
   return count;
 };
 
+console.log(countIncreases(getInput('day-1.txt'))); // 1527
+
 // **
 const countTripletIncreases = (data: number[]) => {
   const sumsOfTriplets = data.map((_, i, arr) => arr[i] + arr[i + 1] + arr[i + 2]);
@@ -28,3 +24,5 @@ const countTripletIncreases = (data: number[]) => {
 
   return count;
 };
+
+console.log(countTripletIncreases(getInput('day-1.txt'))); // 1575
