@@ -22,20 +22,17 @@ const positionMultiplication = (data: Input[], withAim: boolean) => {
       case 'forward':
         horizontalPosition += units;
         if (withAim) depth += units * aim;
+
         break;
       case 'down':
-        if (withAim) {
-          aim += units;
-        } else {
-          depth += units;
-        }
+        if (withAim) aim += units;
+        else depth += units;
+
         break;
       case 'up':
-        if (withAim) {
-          aim -= units;
-        } else {
-          depth -= units;
-        }
+        if (withAim) aim -= units;
+        else depth -= units;
+
         break;
     }
   }
