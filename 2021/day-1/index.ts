@@ -1,4 +1,10 @@
-import { getInput } from '../../utils';
+import fs from 'fs';
+
+const input = fs
+  .readFileSync(__dirname + '/input.txt')
+  .toString()
+  .split('\n')
+  .map(el => Number(el));
 
 // *
 const countIncreases = (data: number[]) => {
@@ -11,7 +17,7 @@ const countIncreases = (data: number[]) => {
   return count;
 };
 
-console.log(countIncreases(getInput('day-1.txt'))); // 1527
+console.log(countIncreases(input)); // 1527
 
 // **
 const countTripletIncreases = (data: number[]) => {
@@ -25,4 +31,4 @@ const countTripletIncreases = (data: number[]) => {
   return count;
 };
 
-console.log(countTripletIncreases(getInput('day-1.txt'))); // 1575
+console.log(countTripletIncreases(input)); // 1575
