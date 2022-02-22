@@ -1,13 +1,6 @@
 const getMostCommonBit = (data: string[], index: number) => {
-  let zero = 0;
-  let one = 0;
-
-  for (const line of data) {
-    if (line.charAt(index) === '1') one++;
-    else zero++;
-  }
-
-  return one >= zero ? '1' : '0';
+  const onesCount = data.filter(line => line.charAt(index) === '1').length;
+  return onesCount >= data.length / 2 ? '1' : '0';
 };
 
 const swapBit = (bit: '1' | '0') => {
