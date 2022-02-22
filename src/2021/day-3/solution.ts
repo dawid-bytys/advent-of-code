@@ -9,8 +9,7 @@ const swapBit = (bit: '1' | '0') => {
 
 // *
 export const ratesMultiplication = (data: string[]) => {
-  let gammaRate = '';
-  let epsilonRate = '';
+  let [gammaRate, epsilonRate] = ['', ''];
 
   for (let i = 0; i < data[0].length; i++) {
     const mostCommonBit = getMostCommonBit(data, i);
