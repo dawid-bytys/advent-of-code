@@ -1,49 +1,47 @@
-// Help functions for the functional method
-const transposeMatrix = (matrix: string[][]) => {
-  return matrix[0].map((_, i) => matrix.map(row => row[i]));
+const getMostCommonBit = (data: string[], index: number) => {
+  let zero = 0;
+  let one = 0;
+
+  for (const line of data) {
+    if (line.charAt(index) === '1') one++;
+    else zero++;
+  }
+
+  return one >= zero ? '1' : '0';
 };
 
-const getSumsOfColumns = (data: string[][]) => {
-  return data.map(col => col.map(val => Number(val)).reduce((x, y) => x + y));
+const swapBit = (bit: '1' | '0') => {
+  return bit === '1' ? '0' : '1';
 };
 
-// * functionally
-export const ratesMultiplicationFunctionally = (data: string[]) => {
-  const splitedData = data.map(el => el.split(''));
-  const transposedData = transposeMatrix(splitedData);
-  const sumsOfColumns = getSumsOfColumns(transposedData);
-
-  const gammaRate = sumsOfColumns
-    .map(sum => (sum > data.length / 2 ? '1' : '0'))
-    .join('');
-  const epsilonRate = sumsOfColumns
-    .map(sum => (sum > data.length / 2 ? '0' : '1'))
-    .join('');
-
-  return parseInt(gammaRate, 2) * parseInt(epsilonRate, 2);
-};
-
-// * structurally
-export const ratesMultiplicationStructurally = (data: string[]) => {
+// *
+export const ratesMultiplication = (data: string[]) => {
   let gammaRate = '';
   let epsilonRate = '';
-  let i = 0;
 
-  while (i !== data[0].length) {
-    const sumOfOnes = data
-      .filter(el => el.charAt(i) === '1')
-      .map(el => Number(el.charAt(i))).length;
+  for (let i = 0; i < data[0].length; i++) {
+    const mostCommonBit = getMostCommonBit(data, i);
 
-    if (sumOfOnes > data.length / 2) {
-      gammaRate += '1';
-      epsilonRate += '0';
-    } else {
-      gammaRate += '0';
-      epsilonRate += '1';
-    }
-
-    i++;
+    gammaRate += mostCommonBit;
+    epsilonRate += swapBit(mostCommonBit);
   }
 
   return parseInt(gammaRate, 2) * parseInt(epsilonRate, 2);
+};
+
+// **
+export const determineLifeSupportRating = (data: string[]) => {
+  let [oxygenRating, co2Rating] = [data, data];
+
+  for (let i = 0; i < data[0].length && oxygenRating.length > 1; i++) {
+    const mostCommonBit = getMostCommonBit(oxygenRating, i);
+    oxygenRating = oxygenRating.filter(el => el.charAt(i) === mostCommonBit);
+  }
+
+  for (let i = 0; i < data[0].length && co2Rating.length > 1; i++) {
+    const mostCommonBit = getMostCommonBit(co2Rating, i);
+    co2Rating = co2Rating.filter(el => el.charAt(i) !== mostCommonBit);
+  }
+
+  return parseInt(oxygenRating[0], 2) * parseInt(co2Rating[0], 2);
 };
