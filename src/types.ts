@@ -29,6 +29,6 @@ export type Day =
 export type Action = 'forward' | 'up' | 'down';
 
 export interface DayTwoInput {
-  action: Action;
-  units: number;
+  readonly action: Action;
+  readonly units: number;
 }
