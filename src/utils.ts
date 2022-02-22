@@ -8,3 +8,9 @@ export const readFromFile = (filename: string, year: Year, day: Day) => {
     'utf-8',
   );
 };
+
+export const benchmark = <T>(message: string, func: () => T) => {
+  console.time(message);
+  func();
+  console.timeEnd(message);
+};
