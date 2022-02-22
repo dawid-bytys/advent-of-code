@@ -1,16 +1,10 @@
-import type { DayTwoInput } from '../../types';
+import type { Action, DayTwoInput } from '../../types';
+import { generateMockInput, generateRandomNumber } from '../../utils';
 
-export const dayTwoMock: DayTwoInput[] = [
-  {
-    action: 'forward',
-    units: 3,
-  },
-  {
-    action: 'up',
-    units: 10,
-  },
-  {
-    action: 'down',
-    units: 5,
-  },
-];
+export const dayTwoMock: DayTwoInput[] = generateMockInput<DayTwoInput>(
+  1000000,
+  () => ({
+    action: ['forward', 'up', 'down'][generateRandomNumber(2)] as Action,
+    units: generateRandomNumber(100),
+  }),
+);

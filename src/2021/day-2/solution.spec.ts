@@ -1,15 +1,8 @@
 import { readFromFile } from '../../utils';
 import { positionMultiplication } from './solution';
-import { dayTwoMock } from './mocks';
 import type { DayTwoInput, Action } from '../../types';
 
 describe('⏳ Testing day 2 solution for the first star...', () => {
-  it('it should return 4', () => {
-    const result = positionMultiplication(dayTwoMock, false);
-
-    expect(result).toEqual(-15);
-  });
-
   it('it should return correct answer of my input -> 1728414', () => {
     const input = readFromFile('input.txt', 2021, 2);
     const formatedInput: DayTwoInput[] = input.split('\n').map(el => ({
@@ -23,12 +16,6 @@ describe('⏳ Testing day 2 solution for the first star...', () => {
 });
 
 describe('⏳ Testing day 2 solution for the second star...', () => {
-  it('it should return 0', () => {
-    const result = positionMultiplication(dayTwoMock, true);
-
-    expect(result).toEqual(0);
-  });
-
   it('it should return the correct answer of my input -> 1765720035', () => {
     const input = readFromFile('input.txt', 2021, 2);
     const formatedInput: DayTwoInput[] = input.split('\n').map(el => ({

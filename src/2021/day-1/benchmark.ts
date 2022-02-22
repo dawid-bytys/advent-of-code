@@ -1,18 +1,17 @@
-import { benchmark, readFromFile } from '../../utils';
+import { benchmark } from '../../utils';
+import { dayOneMock } from './mocks';
 import {
   countIncreasesFunctionally,
   countIncreasesStructurally,
   countTripletsIncreases,
 } from './solution';
 
-const input = readFromFile('input.txt', 2021, 1).split('\n').map(Number);
-
 benchmark<number>('* structural function performance', () =>
-  countIncreasesStructurally(input),
+  countIncreasesStructurally(dayOneMock),
 );
 benchmark<number>('* functional function performance', () =>
-  countIncreasesFunctionally(input),
+  countIncreasesFunctionally(dayOneMock),
 );
 benchmark<number>('** function performance', () =>
-  countTripletsIncreases(input),
+  countTripletsIncreases(dayOneMock),
 );

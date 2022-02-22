@@ -14,3 +14,18 @@ export const benchmark = <T>(message: string, func: () => T) => {
   func();
   console.timeEnd(message);
 };
+
+export const generateRandomNumber = (max: number) => {
+  return Math.floor(Math.random() * max);
+};
+
+export const generateMockInput = <T>(numberOfLines: number, func: () => T) => {
+  return new Array(numberOfLines).fill(null).map(() => func()) as T[];
+};
+
+export const generateRandomBits = (length: number) => {
+  return new Array(length)
+    .fill(null)
+    .map(() => ['1', '0'][generateRandomNumber(1)])
+    .join('');
+};

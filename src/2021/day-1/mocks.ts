@@ -1,1 +1,5 @@
-export const dayOneMock = [1, 2, 3, 2, 1, 4, 5];
+import { generateMockInput, generateRandomNumber } from '../../utils';
+
+export const dayOneMock = generateMockInput<number>(1000000, () =>
+  generateRandomNumber(100),
+);
