@@ -31,7 +31,6 @@ export const findWinnerBoard = (data: string) => {
   let foundWinner: BingoBoard | null = null;
   let lastNum = 0;
   let isWinnerByColumn = false;
-  let bingoResult = 0;
 
   for (const num of nums) {
     const hasBoardWinByColumn = filteredBoards.filter(board =>
@@ -54,18 +53,18 @@ export const findWinnerBoard = (data: string) => {
   }
 
   if (isWinnerByColumn) {
-    bingoResult =
+    return (
       foundWinner!.columns
         .flatMap(col => col)
         .filter(el => el !== -1)
-        .reduce((x, y) => x + y) * lastNum;
-  } else {
-    bingoResult =
-      foundWinner!.rows
-        .flatMap(row => row)
-        .filter(el => el !== -1)
-        .reduce((x, y) => x + y) * lastNum;
+        .reduce((x, y) => x + y) * lastNum
+    );
   }
 
-  return bingoResult;
+  return (
+    foundWinner!.rows
+      .flatMap(row => row)
+      .filter(el => el !== -1)
+      .reduce((x, y) => x + y) * lastNum
+  );
 };
