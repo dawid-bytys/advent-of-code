@@ -25,14 +25,14 @@ const getNextNums = (data: string) => {
   return data.split('\n')[0].split(',').map(Number);
 };
 
-// *, **
+// *
 export const findWinnerBoard = (data: string) => {
   const nums = getNextNums(data);
   let filteredBoards = formatBoards(data);
   let foundWinner: BingoBoard | null = null;
-  let lastNum: number = 0;
+  let lastNum = 0;
   let isWinnerByColumn = false;
-  let bingoResult: number = 0;
+  let bingoResult = 0;
 
   for (const num of nums) {
     const hasBoardWinByColumn = filteredBoards.filter(board =>
