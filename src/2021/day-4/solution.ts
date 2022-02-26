@@ -4,7 +4,7 @@ const transposeMatrix = (matrix: number[][]) => {
   return matrix[0].map((_, idx) => matrix.map(row => row[idx]));
 };
 
-export const formatBoards = (data: string) => {
+const formatBoards = (data: string) => {
   const boards = data
     .split('\n\n')
     .splice(1)
@@ -21,17 +21,18 @@ export const formatBoards = (data: string) => {
   })) as BingoBoard[];
 };
 
-export const getNextNums = (data: string) => {
+const getNextNums = (data: string) => {
   return data.split('\n')[0].split(',').map(Number);
 };
 
-// *
-export const findFirstWinner = (boards: BingoBoard[], nums: number[]) => {
-  let filteredBoards = boards;
-  let foundFirstWinner!: BingoBoard;
-  let lastNum!: number;
+// *, **
+export const findWinnerBoard = (data: string) => {
+  const nums = getNextNums(data);
+  let filteredBoards = formatBoards(data);
+  let foundWinner: BingoBoard | null = null;
+  let lastNum: number = 0;
   let isWinnerByColumn = false;
-  let bingoResult: number;
+  let bingoResult: number = 0;
 
   for (const num of nums) {
     const hasBoardWinByColumn = filteredBoards.filter(board =>
@@ -40,13 +41,9 @@ export const findFirstWinner = (boards: BingoBoard[], nums: number[]) => {
     const hasBoardWinByRow = filteredBoards.filter(board =>
       board.rows.find(row => row.every(el => el === -1)),
     );
-    if (hasBoardWinByColumn.length) {
-      foundFirstWinner = hasBoardWinByColumn[0];
-      isWinnerByColumn = true;
-      break;
-    }
-    if (hasBoardWinByRow.length) {
-      foundFirstWinner = hasBoardWinByRow[0];
+    if (hasBoardWinByColumn.length || hasBoardWinByRow.length) {
+      foundWinner = hasBoardWinByColumn[0] || hasBoardWinByRow[0];
+      isWinnerByColumn = hasBoardWinByColumn.length ? true : false;
       break;
     }
 
@@ -60,13 +57,13 @@ export const findFirstWinner = (boards: BingoBoard[], nums: number[]) => {
 
   if (isWinnerByColumn) {
     bingoResult =
-      foundFirstWinner.columns
+      foundWinner!.columns
         .flatMap(col => col)
         .filter(el => el !== -1)
         .reduce((x, y) => x + y) * lastNum;
   } else {
     bingoResult =
-      foundFirstWinner.rows
+      foundWinner!.rows
         .flatMap(row => row)
         .filter(el => el !== -1)
         .reduce((x, y) => x + y) * lastNum;
