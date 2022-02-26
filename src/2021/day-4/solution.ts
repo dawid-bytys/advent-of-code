@@ -55,7 +55,7 @@ export const findWinnerBoard = (data: string) => {
   if (isWinnerByColumn) {
     return (
       foundWinner!.columns
-        .flatMap(col => col)
+        .flat()
         .filter(el => el !== -1)
         .reduce((x, y) => x + y) * lastNum
     );
@@ -63,7 +63,7 @@ export const findWinnerBoard = (data: string) => {
 
   return (
     foundWinner!.rows
-      .flatMap(row => row)
+      .flat()
       .filter(el => el !== -1)
       .reduce((x, y) => x + y) * lastNum
   );
