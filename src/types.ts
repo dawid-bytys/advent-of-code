@@ -32,3 +32,9 @@ export interface DayTwoInput {
   readonly action: Action;
   readonly units: number;
 }
+
+export interface BingoBoard {
+  id: number;
+  columns: number[][];
+  rows: number[][];
+}
