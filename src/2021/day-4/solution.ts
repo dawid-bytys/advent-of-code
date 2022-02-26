@@ -14,8 +14,7 @@ const formatBoards = (data: string) => {
         .map(row => row.replace(/\s+/g, ' ').trim().split(' ').map(Number)),
     );
 
-  return boards.map((board, idx) => ({
-    id: idx,
+  return boards.map(board => ({
     rows: board,
     columns: transposeMatrix(board),
   })) as BingoBoard[];
@@ -48,7 +47,6 @@ export const findWinnerBoard = (data: string) => {
     }
 
     filteredBoards = filteredBoards.map(board => ({
-      ...board,
       columns: board.columns.map(col => col.map(el => (el === num ? -1 : el))),
       rows: board.rows.map(row => row.map(el => (el === num ? -1 : el))),
     }));

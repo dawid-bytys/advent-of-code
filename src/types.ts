@@ -34,7 +34,6 @@ export interface DayTwoInput {
 }
 
 export interface BingoBoard {
-  id: number;
   columns: number[][];
   rows: number[][];
 }
