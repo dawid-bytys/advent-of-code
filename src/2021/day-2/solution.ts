@@ -13,18 +13,23 @@ export const positionMultiplication = (
     switch (action) {
       case 'forward':
         horizontalPosition += units;
-        if (withAim) depth += units * aim;
-
+        if (withAim) {
+          depth += units * aim;
+        }
         break;
       case 'down':
-        if (withAim) aim += units;
-        else depth += units;
-
+        if (withAim) {
+          aim += units;
+        } else {
+          depth += units;
+        }
         break;
       case 'up':
-        if (withAim) aim -= units;
-        else depth -= units;
-
+        if (withAim) {
+          aim -= units;
+        } else {
+          depth -= units;
+        }
         break;
     }
   }

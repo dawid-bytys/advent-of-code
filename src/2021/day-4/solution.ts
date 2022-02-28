@@ -25,7 +25,7 @@ const getNextNums = (data: string) => {
 };
 
 // *
-export const findWinnerBoard = (data: string) => {
+export const findFirstWinner = (data: string) => {
   const nums = getNextNums(data);
   let filteredBoards = formatBoards(data);
   let foundWinner: BingoBoard | null = null;
@@ -42,6 +42,58 @@ export const findWinnerBoard = (data: string) => {
     if (hasBoardWinByColumn.length || hasBoardWinByRow.length) {
       foundWinner = hasBoardWinByColumn[0] || hasBoardWinByRow[0];
       isWinnerByColumn = hasBoardWinByColumn.length ? true : false;
+      break;
+    }
+
+    filteredBoards = filteredBoards.map(board => ({
+      columns: board.columns.map(col => col.map(el => (el === num ? -1 : el))),
+      rows: board.rows.map(row => row.map(el => (el === num ? -1 : el))),
+    }));
+    lastNum = num;
+  }
+
+  if (isWinnerByColumn) {
+    return (
+      foundWinner!.columns
+        .flat()
+        .filter(el => el !== -1)
+        .reduce((x, y) => x + y) * lastNum
+    );
+  }
+
+  return (
+    foundWinner!.rows
+      .flat()
+      .filter(el => el !== -1)
+      .reduce((x, y) => x + y) * lastNum
+  );
+};
+
+// *
+export const findLastWinner = (data: string) => {
+  const nums = getNextNums(data);
+  const BOARDS_COUNT = formatBoards(data).length;
+  let filteredBoards = formatBoards(data);
+  let foundWinner: BingoBoard | null = null;
+  let lastNum = 0;
+  let isWinnerByColumn = false;
+
+  for (const num of nums) {
+    const hasBoardWinByColumn = filteredBoards.filter(board =>
+      board.columns.some(col => col.every(el => el === -1)),
+    );
+    const hasBoardWinByRow = filteredBoards.filter(board =>
+      board.rows.some(row => row.every(el => el === -1)),
+    );
+    if (
+      hasBoardWinByColumn.length === BOARDS_COUNT ||
+      hasBoardWinByRow.length === BOARDS_COUNT
+    ) {
+      foundWinner =
+        hasBoardWinByColumn[BOARDS_COUNT - 1] ||
+        hasBoardWinByRow[BOARDS_COUNT - 1];
+      isWinnerByColumn =
+        hasBoardWinByColumn.length === BOARDS_COUNT ? true : false;
       break;
     }
 

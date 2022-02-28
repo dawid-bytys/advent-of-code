@@ -3,7 +3,9 @@ export const countIncreasesStructurally = (data: number[]) => {
   let count = 0;
 
   for (let i = 0; i < data.length - 1; i++) {
-    if (data[i] < data[i + 1]) count++;
+    if (data[i] < data[i + 1]) {
+      count++;
+    }
   }
 
   return count;
