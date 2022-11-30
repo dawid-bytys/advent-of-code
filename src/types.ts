@@ -1,4 +1,4 @@
-export type Year = 2020 | 2021;
+export type Year = 2020 | 2021 | 2022;
 export type Day =
   | 1
   | 2
@@ -25,15 +25,3 @@ export type Day =
   | 23
   | 24
   | 25;
-
-export type Action = 'forward' | 'up' | 'down';
-
-export interface DayTwoInput {
-  readonly action: Action;
-  readonly units: number;
-}
-
-export interface BingoBoard {
-  columns: number[][];
-  rows: number[][];
-}

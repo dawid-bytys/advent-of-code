@@ -1,3 +1,4 @@
+// utils
 const getMostCommonBit = (data: string[], index: number) => {
   const onesCount = data.filter(line => line.charAt(index) === '1').length;
   return onesCount >= data.length / 2 ? '1' : '0';
@@ -8,10 +9,11 @@ const swapBit = (bit: '1' | '0') => {
 };
 
 // *
-export const ratesMultiplication = (data: string[]) => {
-  let [gammaRate, epsilonRate] = ['', ''];
+export const getRatesMultiplication = (data: string[]) => {
+  let gammaRate = '';
+  let epsilonRate = '';
 
-  for (let i = 0; i < data[0].length; i++) {
+  for (let i = 0; i < data[0].length; ++i) {
     const mostCommonBit = getMostCommonBit(data, i);
 
     gammaRate += mostCommonBit;
@@ -22,15 +24,16 @@ export const ratesMultiplication = (data: string[]) => {
 };
 
 // **
-export const determineLifeSupportRating = (data: string[]) => {
-  let [oxygenRating, co2Rating] = [data, data];
+export const getLifeSupportRating = (data: string[]) => {
+  let oxygenRating = data;
+  let co2Rating = data;
 
-  for (let i = 0; i < data[0].length && oxygenRating.length > 1; i++) {
+  for (let i = 0; i < data[0].length && oxygenRating.length > 1; ++i) {
     const mostCommonBit = getMostCommonBit(oxygenRating, i);
     oxygenRating = oxygenRating.filter(el => el.charAt(i) === mostCommonBit);
   }
 
-  for (let i = 0; i < data[0].length && co2Rating.length > 1; i++) {
+  for (let i = 0; i < data[0].length && co2Rating.length > 1; ++i) {
     const mostCommonBit = getMostCommonBit(co2Rating, i);
     co2Rating = co2Rating.filter(el => el.charAt(i) !== mostCommonBit);
   }
