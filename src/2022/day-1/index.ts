@@ -2,12 +2,12 @@ import { readInput } from '../../utils';
 
 const parsedCalories = readInput(2022, 1).split('\n\n');
 
-const totalCaloriesCarriedByEachElf = parsedCalories.map(meal =>
-  meal
+const totalCaloriesCarriedByEachElf = parsedCalories.map(meal => {
+  return meal
     .split('\n')
     .map(Number)
-    .reduce((a, b) => a + b),
-);
+    .reduce((a, b) => a + b);
+});
 
 // *
 const mostCaloriesCarriedByOneElf = Math.max(...totalCaloriesCarriedByEachElf);
