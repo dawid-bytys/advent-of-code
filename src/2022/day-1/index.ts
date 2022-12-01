@@ -6,7 +6,7 @@ const totalCaloriesCarriedByEachElf = parsedCalories.map(meal => {
   return meal
     .split('\n')
     .map(Number)
-    .reduce((a, b) => a + b);
+    .reduce((acc, currentValue) => acc + currentValue);
 });
 
 // *
@@ -16,7 +16,7 @@ const mostCaloriesCarriedByOneElf = Math.max(...totalCaloriesCarriedByEachElf);
 const mostCaloriesCarriedByThreeElves = totalCaloriesCarriedByEachElf
   .sort((a, b) => b - a)
   .slice(0, 3)
-  .reduce((a, b) => a + b);
+  .reduce((acc, currentValue) => acc + currentValue);
 
 console.log(mostCaloriesCarriedByOneElf); // 67450
 console.log(mostCaloriesCarriedByThreeElves); // 199357
