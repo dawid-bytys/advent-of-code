@@ -18,27 +18,4 @@ const evaluateWinnerBoard = (lines: string[]) => {
   const [rows, columns] = getRowsAndColumns(lines);
   const pickedNumbers = lines[0].split(',');
   const usedNumbers = pickedNumbers.splice(0, 5);
-  const winners = [];
-
-  for (let i = 0; i < pickedNumbers.length; ++i) {
-    const winnerRow = rows.find(row => row.every(cell => usedNumbers.includes(cell)));
-    if (winnerRow) {
-      winners.push({
-        afterNumber: pickedNumbers[i],
-        row: winnerRow,
-      });
-    }
-
-    const winnerColumn = columns.find(column => column.every(cell => usedNumbers.includes(cell)));
-    if (winnerColumn) {
-      winners.push({
-        afterNumber: pickedNumbers[i],
-        column: winnerColumn,
-      });
-    }
-
-    usedNumbers.push(pickedNumbers[i]);
-  }
-
-  // to finish
 };
