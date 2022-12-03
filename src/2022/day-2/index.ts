@@ -1,44 +1,37 @@
 import { readInput } from '../../utils';
-import type { Shape } from './types';
+import type { Round } from './types';
 
 const input = readInput(2022, 2).split('\n');
 
-export const shapes: Shape[] = [
-  {
-    name: ['A', 'X'],
-    weight: 1,
-    beats: ['C', 'Z'],
-  },
-  {
-    name: ['B', 'Y'],
-    weight: 2,
-    beats: ['A', 'X'],
-  },
-  {
-    name: ['C', 'Z'],
-    weight: 3,
-    beats: ['B', 'Y'],
-  },
-];
+const OUTCOMES = {
+  'A X': 3 + 1,
+  'A Y': 6 + 2,
+  'A Z': 0 + 3,
+  'B X': 0 + 1,
+  'B Y': 3 + 2,
+  'B Z': 6 + 3,
+  'C X': 6 + 1,
+  'C Y': 0 + 2,
+  'C Z': 3 + 3,
+};
 
-// *
-const myTotalScore = input.reduce((acc, currentValue) => {
-  const [opponent, me] = currentValue.split(' ');
-  const opponentShape = shapes.find(({ name }) => name.includes(opponent));
-  const myShape = shapes.find(({ name }) => name.includes(me));
+const OUTCOMES_WITH_HANDICAP = {
+  'A X': 0 + 3,
+  'A Y': 3 + 1,
+  'A Z': 6 + 2,
+  'B X': 0 + 1,
+  'B Y': 3 + 2,
+  'B Z': 6 + 3,
+  'C X': 0 + 2,
+  'C Y': 3 + 3,
+  'C Z': 6 + 1,
+};
 
-  if (!opponentShape || !myShape) {
-    throw new Error('Invalid input');
-  }
-  if (myShape.beats.includes(opponent)) {
-    return acc + myShape.weight + 6;
-  }
-  if (opponentShape.beats.includes(me)) {
-    return acc + myShape.weight;
-  }
-  if (opponentShape === myShape) {
-    return acc + myShape.weight + 3;
-  }
+// *, **
+const getTotalScore = (rounds: Round[], handicap: boolean) => {
+  const outcomes = handicap ? OUTCOMES_WITH_HANDICAP : OUTCOMES;
+  return rounds.reduce((acc, round) => acc + outcomes[round], 0);
+};
 
-  return acc;
-}, 0);
+console.log(getTotalScore(input as Round[], false)); // 12740
+console.log(getTotalScore(input as Round[], true)); // 11980

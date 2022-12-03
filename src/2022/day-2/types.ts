@@ -1,5 +1,1 @@
-export interface Shape {
-  readonly name: [string, string];
-  readonly beats: [string, string];
-  readonly weight: number;
-}
+export type Round = 'A X' | 'A Y' | 'A Z' | 'B X' | 'B Y' | 'B Z' | 'C X' | 'C Y' | 'C Z';
