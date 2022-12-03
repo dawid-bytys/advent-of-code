@@ -35,7 +35,7 @@ const getSumOfPriorities = (input: string[]) => {
 };
 
 // **
-const getSumOfPrioritiesOfThreeCompartments = (input: string[]) => {
+const getSumOfPrioritiesByThreeRucksacks = (input: string[]) => {
   let sumOfPriorities = 0;
 
   for (let i = 0; i < input.length - 2; i += 3) {
@@ -50,4 +50,4 @@ const getSumOfPrioritiesOfThreeCompartments = (input: string[]) => {
 };
 
 console.log(getSumOfPriorities(input)); // 7908
-console.log(getSumOfPrioritiesOfThreeCompartments(input)); // 2838
+console.log(getSumOfPrioritiesByThreeRucksacks(input)); // 2838
