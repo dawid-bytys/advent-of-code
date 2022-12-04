@@ -16,13 +16,13 @@ const doSectionsOverlapAtAll = (firstSection: number[], secondSection: number[])
   );
 };
 
-// *
-const getCountOfOverlaps = (input: string[]) => {
+// *, **
+const getCountOfOverlaps = (input: string[], atAll: boolean) => {
   let countOfOverlaps = 0;
 
   for (const line of input) {
     const [firstSection, secondSection] = line.split(',').map(section => section.split('-').map(Number));
-    if (doSectionsOverlap(firstSection, secondSection)) {
+    if (atAll ? doSectionsOverlapAtAll(firstSection, secondSection) : doSectionsOverlap(firstSection, secondSection)) {
       ++countOfOverlaps;
     }
   }
@@ -30,19 +30,5 @@ const getCountOfOverlaps = (input: string[]) => {
   return countOfOverlaps;
 };
 
-// **
-const getCountOfOverlapsAtAll = (input: string[]) => {
-  let countOfOverlaps = 0;
-
-  for (const line of input) {
-    const [firstSection, secondSection] = line.split(',').map(section => section.split('-').map(Number));
-    if (doSectionsOverlapAtAll(firstSection, secondSection)) {
-      ++countOfOverlaps;
-    }
-  }
-
-  return countOfOverlaps;
-};
-
-console.log(getCountOfOverlaps(input)); // 518
-console.log(getCountOfOverlapsAtAll(input)); // 909
+console.log(getCountOfOverlaps(input, false)); // 518
+console.log(getCountOfOverlaps(input, true)); // 909
