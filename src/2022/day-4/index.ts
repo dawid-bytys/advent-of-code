@@ -19,7 +19,6 @@ const getCountOfOverlaps = (input: string[]) => {
 
   for (const line of input) {
     const [firstSection, secondSection] = line.split(',').map(section => section.split('-').map(Number));
-
     if (doSectionsOverlap(firstSection, secondSection) || doSectionsOverlap(secondSection, firstSection)) {
       ++countOfOverlaps;
     }
@@ -34,7 +33,6 @@ const getCountOfOverlapsAtAll = (input: string[]) => {
 
   for (const line of input) {
     const [firstSection, secondSection] = line.split(',').map(section => section.split('-').map(Number));
-
     if (doSectionsOverlapAtAll(firstSection, secondSection) || doSectionsOverlapAtAll(secondSection, firstSection)) {
       ++countOfOverlaps;
     }
