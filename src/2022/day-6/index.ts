@@ -10,7 +10,7 @@ const getCountOfCharsBeforePacket = (buffer: string, packetSize: number) => {
       return i + packetSize;
     }
   }
-  return null;
+  return 0;
 };
 
 console.log(getCountOfCharsBeforePacket(input, 4)); // 1920
