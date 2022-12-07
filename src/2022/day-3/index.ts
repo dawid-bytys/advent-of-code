@@ -13,17 +13,17 @@ const getFirstCommonChar = (firstString: string, secondString: string, thirdStri
   return null;
 };
 
-const getHalvesOfString = (input: string) => {
+const getStringHalves = (input: string) => {
   const half = Math.floor(input.length / 2);
   return [input.slice(0, half), input.slice(half)];
 };
 
 // *
-const getSumOfPriorities = (input: string[]) => {
+const getPrioritiesSum = (input: string[]) => {
   let sumOfPriorities = 0;
 
   for (const line of input) {
-    const [firstCompartment, secondCompartment] = getHalvesOfString(line);
+    const [firstCompartment, secondCompartment] = getStringHalves(line);
     const firstCommonChar = getFirstCommonChar(firstCompartment, secondCompartment);
     if (firstCommonChar) {
       const indexOfFirstCommonChar = ALPHABET.indexOf(firstCommonChar);
@@ -35,7 +35,7 @@ const getSumOfPriorities = (input: string[]) => {
 };
 
 // **
-const getSumOfPrioritiesByThreeRucksacks = (input: string[]) => {
+const getPrioritiesByThreeRucksacksSum = (input: string[]) => {
   let sumOfPriorities = 0;
 
   for (let i = 0; i < input.length - 2; i += 3) {
@@ -49,5 +49,5 @@ const getSumOfPrioritiesByThreeRucksacks = (input: string[]) => {
   return sumOfPriorities;
 };
 
-console.log(getSumOfPriorities(input)); // 7908
-console.log(getSumOfPrioritiesByThreeRucksacks(input)); // 2838
+console.log(getPrioritiesSum(input)); // 7908
+console.log(getPrioritiesByThreeRucksacksSum(input)); // 2838

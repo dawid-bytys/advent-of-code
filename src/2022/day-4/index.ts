@@ -17,7 +17,7 @@ const doSectionsOverlapAtAll = (firstSection: number[], secondSection: number[])
 };
 
 // *, **
-const getCountOfOverlaps = (input: string[], atAll: boolean) => {
+const getOverlapsCount = (input: string[], atAll: boolean) => {
   let countOfOverlaps = 0;
 
   for (const line of input) {
@@ -30,5 +30,5 @@ const getCountOfOverlaps = (input: string[], atAll: boolean) => {
   return countOfOverlaps;
 };
 
-console.log(getCountOfOverlaps(input, false)); // 518
-console.log(getCountOfOverlaps(input, true)); // 909
+console.log(getOverlapsCount(input, false)); // 518
+console.log(getOverlapsCount(input, true)); // 909
