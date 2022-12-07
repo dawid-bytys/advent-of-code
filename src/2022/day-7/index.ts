@@ -1,6 +1,7 @@
 import { readInput } from '../../utils';
 
-const input = readInput(2022, 7).split('\n');
+const rawInput = readInput(2022, 7);
+const lines = rawInput.split('\n');
 
 const createPath = (directories: string[]) => {
   return directories.map((directory, index) => {
@@ -35,10 +36,10 @@ const getDirectoriesSizes = (lines: string[]) => {
   return [...directories.values()].map(size => size);
 };
 
-const totalSize = getDirectoriesSizes(input)[0];
+const totalSize = getDirectoriesSizes(lines)[0];
 
 // *
-const directoriesSizesSum = getDirectoriesSizes(input).reduce((acc, size) => {
+const directoriesSizesSum = getDirectoriesSizes(lines).reduce((acc, size) => {
   if (size <= 100_000) {
     return acc + size;
   }
@@ -46,7 +47,7 @@ const directoriesSizesSum = getDirectoriesSizes(input).reduce((acc, size) => {
 }, 0);
 
 // **
-const directoryToDeleteSize = Math.min(...getDirectoriesSizes(input).filter(size => size >= totalSize - 40_000_000));
+const directoryToDeleteSize = Math.min(...getDirectoriesSizes(lines).filter(size => size >= totalSize - 40_000_000));
 
 console.log(directoriesSizesSum); // 1513699
 console.log(directoryToDeleteSize); // 7991939

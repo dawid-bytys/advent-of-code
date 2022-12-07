@@ -1,6 +1,6 @@
 import { readInput } from '../../utils';
 
-const input = readInput(2022, 6);
+const rawInput = readInput(2022, 6);
 
 // *, **
 const getCharsBeforePacketCount = (buffer: string, packetSize: number) => {
@@ -13,5 +13,5 @@ const getCharsBeforePacketCount = (buffer: string, packetSize: number) => {
   return 0;
 };
 
-console.log(getCharsBeforePacketCount(input, 4)); // 1920
-console.log(getCharsBeforePacketCount(input, 14)); // 2334
+console.log(getCharsBeforePacketCount(rawInput, 4)); // 1920
+console.log(getCharsBeforePacketCount(rawInput, 14)); // 2334

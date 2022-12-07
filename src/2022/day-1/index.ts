@@ -1,6 +1,7 @@
 import { readInput } from '../../utils';
 
-const parsedCalories = readInput(2022, 1).split('\n\n');
+const rawInput = readInput(2022, 1);
+const parsedCalories = rawInput.split('\n\n');
 
 const totalCaloriesCarriedByEachElf = parsedCalories.map(meal => {
   return meal

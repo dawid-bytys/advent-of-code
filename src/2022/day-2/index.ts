@@ -1,7 +1,8 @@
 import { readInput } from '../../utils';
 import type { Round } from './types';
 
-const input = readInput(2022, 2).split('\n');
+const rawInput = readInput(2022, 2);
+const lines = rawInput.split('\n');
 
 const OUTCOMES = {
   'A X': 3 + 1,
@@ -33,5 +34,5 @@ const getTotalScore = (rounds: Round[], handicap: boolean) => {
   return rounds.reduce((acc, round) => acc + outcomes[round], 0);
 };
 
-console.log(getTotalScore(input as Round[], false)); // 12740
-console.log(getTotalScore(input as Round[], true)); // 11980
+console.log(getTotalScore(lines as Round[], false)); // 12740
+console.log(getTotalScore(lines as Round[], true)); // 11980

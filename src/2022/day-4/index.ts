@@ -1,6 +1,7 @@
 import { readInput } from '../../utils';
 
-const input = readInput(2022, 4).split('\n');
+const rawInput = readInput(2022, 4);
+const lines = rawInput.split('\n');
 
 const doSectionsOverlap = (firstSection: number[], secondSection: number[]) => {
   return (
@@ -30,5 +31,5 @@ const getOverlapsCount = (input: string[], atAll: boolean) => {
   return countOfOverlaps;
 };
 
-console.log(getOverlapsCount(input, false)); // 518
-console.log(getOverlapsCount(input, true)); // 909
+console.log(getOverlapsCount(lines, false)); // 518
+console.log(getOverlapsCount(lines, true)); // 909

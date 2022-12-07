@@ -1,6 +1,7 @@
 import { readInput } from '../../utils';
 
-const input = readInput(2022, 3).split('\n');
+const rawInput = readInput(2022, 3);
+const lines = rawInput.split('\n');
 
 const ALPHABET = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
 
@@ -49,5 +50,5 @@ const getPrioritiesByThreeRucksacksSum = (input: string[]) => {
   return sumOfPriorities;
 };
 
-console.log(getPrioritiesSum(input)); // 7908
-console.log(getPrioritiesByThreeRucksacksSum(input)); // 2838
+console.log(getPrioritiesSum(lines)); // 7908
+console.log(getPrioritiesByThreeRucksacksSum(lines)); // 2838
