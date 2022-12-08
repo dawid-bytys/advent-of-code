@@ -56,7 +56,7 @@ const getVisibleTreesCountAndScenicScore = (trees: string[][]) => {
         }
       }
 
-      if (visibleWays != 0) {
+      if (visibleWays > 0) {
         ++visibleTreesCount;
       }
 
