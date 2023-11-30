@@ -1,4 +1,4 @@
-export type Year = 2020 | 2021 | 2022;
+export type Year = 2020 | 2021 | 2022 | 2023;
 export type Day =
   | 1
   | 2
