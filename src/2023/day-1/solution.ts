@@ -74,6 +74,7 @@ function calibrationValuesSumTwo(lines: string[]) {
   for (const line of lines) {
     let calibrationValue = '';
 
+    // searching for a first digit
     for (let i = 0; i < line.length; ++i) {
       const currentChar = line.charAt(i);
 
@@ -102,6 +103,7 @@ function calibrationValuesSumTwo(lines: string[]) {
       }
     }
 
+    // searching for a last digit
     for (let i = line.length - 1; i >= 0; --i) {
       const currentChar = line.charAt(i);
 
