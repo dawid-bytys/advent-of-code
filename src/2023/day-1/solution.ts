@@ -116,7 +116,7 @@ function calibrationValuesSumTwo(lines: string[]) {
       let stringDigit = line.charAt(i - 1) + currentChar;
 
       while (i - left + 1 <= 5) {
-        stringDigit += line.charAt(left) + stringDigit;
+        stringDigit = line.charAt(left) + stringDigit;
         const numberDigit = mapStringDigitToNumber(stringDigit);
 
         if (numberDigit) {
