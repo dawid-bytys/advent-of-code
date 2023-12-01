@@ -1,13 +1,14 @@
 import { readInput } from '../../utils';
 
 const input = readInput(2023, 1);
+const lines = input.split('\n');
 
 function isDigit(char: string) {
   return !isNaN(Number(char));
 }
 
 function mapStringDigitToNumber(digitString: string) {
-  switch (digitString.toLowerCase()) {
+  switch (digitString) {
     case 'one':
       return '1';
     case 'two':
@@ -32,14 +33,14 @@ function mapStringDigitToNumber(digitString: string) {
 }
 
 // Time: O(n * k)
-// Space: O(n)
-function calibrationValuesSum(input: string) {
-  const lines = input.split('\n');
+// Space: O(1)
+function calibrationValuesSum(lines: string[]) {
   let sum = 0;
 
   for (const line of lines) {
     let calibrationValue = '';
 
+    // searching for a first digit
     for (let i = 0; i < line.length; ++i) {
       const currentChar = line.charAt(i);
 
@@ -49,6 +50,7 @@ function calibrationValuesSum(input: string) {
       }
     }
 
+    // searching for a last digit
     for (let i = line.length - 1; i >= 0; --i) {
       const currentChar = line.charAt(i);
 
@@ -65,41 +67,74 @@ function calibrationValuesSum(input: string) {
 }
 
 // Time: O(n * k)
-// Space: O(n)
-function calibrationValuesSumTwo(input: string) {
-  const lines = input.split('\n');
+// Space: O(1)
+function calibrationValuesSumTwo(lines: string[]) {
   let sum = 0;
 
   for (const line of lines) {
-    let digitsCombined = '';
+    let calibrationValue = '';
 
     for (let i = 0; i < line.length; ++i) {
       const currentChar = line.charAt(i);
 
       if (isDigit(currentChar)) {
-        digitsCombined += currentChar;
-      } else {
-        let right = i + 2;
-        let stringDigit = currentChar + line.charAt(i + 1);
+        calibrationValue += currentChar;
+        break;
+      }
 
-        while (right - i + 1 <= 5) {
-          stringDigit += line.charAt(right);
-          const numberDigit = mapStringDigitToNumber(stringDigit);
+      let right = i + 2;
+      let stringDigit = currentChar + line.charAt(i + 1);
 
-          if (numberDigit) {
-            digitsCombined += numberDigit;
-          }
+      while (right - i + 1 <= 5) {
+        stringDigit += line.charAt(right);
+        const numberDigit = mapStringDigitToNumber(stringDigit);
 
-          ++right;
+        if (numberDigit) {
+          calibrationValue += numberDigit;
+          break;
         }
+
+        ++right;
+      }
+
+      if (calibrationValue.length === 1) {
+        break;
       }
     }
 
-    sum += Number(digitsCombined.charAt(0) + digitsCombined.charAt(digitsCombined.length - 1));
+    for (let i = line.length - 1; i >= 0; --i) {
+      const currentChar = line.charAt(i);
+
+      if (isDigit(currentChar)) {
+        calibrationValue += currentChar;
+        break;
+      }
+
+      let left = i - 2;
+      let stringDigit = line.charAt(i - 1) + currentChar;
+
+      while (i - left + 1 <= 5) {
+        stringDigit += line.charAt(left) + stringDigit;
+        const numberDigit = mapStringDigitToNumber(stringDigit);
+
+        if (numberDigit) {
+          calibrationValue += numberDigit;
+          break;
+        }
+
+        --left;
+      }
+
+      if (calibrationValue.length === 2) {
+        break;
+      }
+    }
+
+    sum += Number(calibrationValue);
   }
 
   return sum;
 }
 
-console.log(calibrationValuesSum(input));
-console.log(calibrationValuesSumTwo(input));
+console.log(calibrationValuesSum(lines));
+console.log(calibrationValuesSumTwo(lines));
