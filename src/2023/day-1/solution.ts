@@ -31,7 +31,7 @@ function mapStringDigitToNumber(digitString: string) {
   }
 }
 
-// Time: O(n^2)
+// Time: O(n * k)
 // Space: O(n)
 function calibrationValuesSum(input: string) {
   const lines = input.split('\n');
@@ -64,7 +64,7 @@ function calibrationValuesSum(input: string) {
   return sum;
 }
 
-// Time: O(n^2)
+// Time: O(n * k)
 // Space: O(n)
 function calibrationValuesSumTwo(input: string) {
   const lines = input.split('\n');
