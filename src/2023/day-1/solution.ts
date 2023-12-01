@@ -6,41 +6,69 @@ function isDigit(char: string) {
   return !isNaN(Number(char));
 }
 
-// *
+function mapStringDigitToNumber(digitString: string) {
+  switch (digitString.toLowerCase()) {
+    case 'one':
+      return '1';
+    case 'two':
+      return '2';
+    case 'three':
+      return '3';
+    case 'four':
+      return '4';
+    case 'five':
+      return '5';
+    case 'six':
+      return '6';
+    case 'seven':
+      return '7';
+    case 'eight':
+      return '8';
+    case 'nine':
+      return '9';
+    default:
+      return undefined;
+  }
+}
+
+// Time: O(n^2)
+// Space: O(n)
 function calibrationValuesSum(input: string) {
   const lines = input.split('\n');
-  const calibrationValues: number[] = [];
+  let sum = 0;
 
   for (const line of lines) {
-    let digitsCombined = '';
+    let calibrationValue = '';
 
-    for (const char of line) {
-      if (isDigit(char)) {
-        digitsCombined += char;
+    for (let i = 0; i < line.length; ++i) {
+      const currentChar = line.charAt(i);
+
+      if (isDigit(currentChar)) {
+        calibrationValue += currentChar;
+        break;
       }
     }
 
-    calibrationValues.push(Number(digitsCombined.charAt(0) + digitsCombined.charAt(digitsCombined.length - 1)));
+    for (let i = line.length - 1; i >= 0; --i) {
+      const currentChar = line.charAt(i);
+
+      if (isDigit(currentChar)) {
+        calibrationValue += currentChar;
+        break;
+      }
+    }
+
+    sum += Number(calibrationValue);
   }
 
-  return calibrationValues.reduce((acc, el) => acc + el, 0);
+  return sum;
 }
 
-// **
+// Time: O(n^2)
+// Space: O(n)
 function calibrationValuesSumTwo(input: string) {
   const lines = input.split('\n');
-  const calibrationValues: number[] = [];
-  const digitsMap = new Map<string, string>([
-    ['one', '1'],
-    ['two', '2'],
-    ['three', '3'],
-    ['four', '4'],
-    ['five', '5'],
-    ['six', '6'],
-    ['seven', '7'],
-    ['eight', '8'],
-    ['nine', '9'],
-  ]);
+  let sum = 0;
 
   for (const line of lines) {
     let digitsCombined = '';
@@ -56,10 +84,10 @@ function calibrationValuesSumTwo(input: string) {
 
         while (right - i + 1 <= 5) {
           stringDigit += line.charAt(right);
-          const digit = digitsMap.get(stringDigit);
+          const numberDigit = mapStringDigitToNumber(stringDigit);
 
-          if (digit) {
-            digitsCombined += digit;
+          if (numberDigit) {
+            digitsCombined += numberDigit;
           }
 
           ++right;
@@ -67,10 +95,10 @@ function calibrationValuesSumTwo(input: string) {
       }
     }
 
-    calibrationValues.push(Number(digitsCombined.charAt(0) + digitsCombined.charAt(digitsCombined.length - 1)));
+    sum += Number(digitsCombined.charAt(0) + digitsCombined.charAt(digitsCombined.length - 1));
   }
 
-  return calibrationValues.reduce((acc, el) => acc + el, 0);
+  return sum;
 }
 
 console.log(calibrationValuesSum(input));
