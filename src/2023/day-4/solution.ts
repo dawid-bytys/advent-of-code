@@ -3,8 +3,8 @@ import { readInput } from '../../utils';
 const input = readInput(2023, 4);
 
 interface Card {
-  winningNumbers: number[];
-  numbers: number[];
+  winningNumbers: Set<number>;
+  numbers: Set<number>;
 }
 
 function parseInput(input: string) {
@@ -12,14 +12,12 @@ function parseInput(input: string) {
   const cards: Card[] = [];
 
   for (const line of lines) {
-    const splittedLine = line
-      .substring(line.indexOf(': ') + 2)
-      .replace(/\s{2,}/g, ' ')
-      .split(' | ');
-    const winningNumbers = splittedLine[0].split(' ').map(Number);
-    const numbers = splittedLine[1].split(' ').map(Number);
+    const [first, rest] = line.replace(/\s{2}/g, ' ').split(' | ');
+    const [_, card] = first.split(': ');
+    const winningNumbers = card.split(' ').map(Number);
+    const numbers = rest.split(' ').map(Number);
 
-    cards.push({ winningNumbers, numbers });
+    cards.push({ winningNumbers: new Set(winningNumbers), numbers: new Set(numbers) });
   }
 
   return cards;
@@ -27,26 +25,33 @@ function parseInput(input: string) {
 
 function findTotalPoints(input: string) {
   const cards = parseInput(input);
-
   let totalPoints = 0;
 
   for (const card of cards) {
-    let points = 0;
+    const intersectionLength = new Set([...card.winningNumbers].filter((x) => card.numbers.has(x))).size;
 
-    for (const num of card.numbers) {
-      if (card.winningNumbers.includes(num)) {
-        if (points === 0) {
-          points = 1;
-        } else {
-          points *= 2;
-        }
-      }
+    if (intersectionLength > 0) {
+      totalPoints += 2 ** (intersectionLength - 1);
     }
-
-    totalPoints += points;
   }
 
   return totalPoints;
 }
 
+function findTotalScratchcards(input: string) {
+  const cards = parseInput(input);
+  const scratchcardsCount = new Array(cards.length).fill(1);
+
+  for (const [i, card] of cards.entries()) {
+    const intersectionSize = new Set([...card.winningNumbers].filter((x) => card.numbers.has(x))).size;
+
+    for (let j = i + 1; j <= i + intersectionSize; ++j) {
+      scratchcardsCount[j] += scratchcardsCount[i];
+    }
+  }
+
+  return scratchcardsCount.reduce((acc, curr) => acc + curr, 0);
+}
+
 console.log(findTotalPoints(input));
+console.log(findTotalScratchcards(input));
